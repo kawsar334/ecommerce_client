@@ -1,0 +1,117 @@
+
+
+@import "../../global.scss";
+.recomendedcontainer{
+        width: 95%;
+        margin: 10px auto;
+        h4{
+            margin: 5px 0px;
+            font-size: 20px;
+        }
+
+    .recomended{
+        width:100%;
+    height: max-content;
+    .recomenditems{
+        width:100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+@include mobile {
+    flex-wrap: wrap;
+}
+        .recomentditem{
+            // width: 25%;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            flex: 1 0  200px;
+            background-color: white;
+            border: 1px solid lightgray;
+            @include mobile {
+            width: 48%;
+            }
+           
+            &:hover{
+                button{
+                    transition: 1s ease all;
+                    display: block;
+                }
+            }
+            img{
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+                transition: 1s ease all;
+                &:hover{
+                    transform: scale(1.4);
+                }
+
+            }
+            button{
+                position: absolute;
+                top: 70%;
+                left: 30%;
+                border: 1px solid yellow;
+                padding: 3px 10px;
+                border-radius: 20px;
+                cursor: pointer;
+                display: none;
+                font-size: 13px;
+                background-color: transparent;
+                color: yellow;
+                font-weight: 600;
+                
+
+            }
+            
+        }
+    }
+
+    .recomendedbottom{
+        width: 100%;
+        height: 300px;
+        display: flex;
+        margin-top: 20px;
+        justify-content: center;
+        align-items: center;
+        gap: 5px;
+        a{
+            width: 50%;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            background-color:white ;
+            border:2px solid lightgray;
+            
+
+        }
+        img{
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition:  all 1s ease;
+            background-color:black;
+            &:hover{
+                transform: scale(1.4);
+            }
+        }
+                   button {
+                       position: absolute;
+                       top: 70%;
+                       left: 30%;
+                       border: 1px solid rebeccapurple;
+                       padding: 3px 10px;
+                       border-radius: 20px;
+                       cursor: pointer;
+                       font-size: 13px;
+                       background-color: transparent;
+                       color: rebeccapurple;
+                       font-weight: 600;
+        
+        
+                   }
+    }
+}
+}

@@ -1,0 +1,32 @@
+// DarazShopLogoAnimation.scss
+$border-color: #e74c3c; // Update with your preferred color
+$animation-duration: 1s;
+
+.logo-container {
+    position: relative;
+    display: inline-block;
+}
+
+.logo {
+    font-size: 24px; // Adjust the font size as needed
+    font-weight: bold;
+    color: #333; // Adjust the text color
+    display: inline-block;
+    padding: 10px;
+    border: 2px solid transparent;
+    transition: border-color $animation-duration;
+
+    &.animated {
+        animation: logo-border-animation $animation-duration infinite alternate;
+    }
+}
+
+@keyframes logo-border-animation {
+    0% {
+        border-color: transparent;
+    }
+
+    100% {
+        border-color: $border-color;
+    }
+}

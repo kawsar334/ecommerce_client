@@ -1,0 +1,48 @@
+
+
+@import "../../global.scss";
+
+.annouce{
+    display: flex;
+    background-color: teal;
+    justify-content: space-around;
+    align-items: center;
+    height: 50px;
+    padding: 5px;
+    text-transform: capitalize;
+    flex-wrap: wrap;
+    @include mobile{
+        height: max-content;
+        flex-direction: column-reverse;
+
+    }
+    p{
+        color: white;
+        &:hover{
+            color: rebeccapurple;
+        }
+    }
+    .annouceright{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        a{
+            color: white;
+            background-color: black;
+            padding: 5px 10px;
+            border-radius: 20px;
+            border: 1px solid black;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            font-size: 14px;
+            border: 1px solid white;
+            &:hover{
+                background-color: transparent;
+
+            }
+
+        }
+
+    }
+}

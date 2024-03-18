@@ -1,0 +1,83 @@
+
+
+
+@import "../../global.scss";
+.slider{
+    width: 100%;
+    height: 300px;
+    margin: 0px 0px 20px 0px ;
+    padding: 10px;
+    background-color: rgb(0,0,0,0.4);
+    background-color: black;
+    background-color: hsl(220, 21%, 28%);
+    color: white;
+        @include mobile {
+            padding: 0;
+            height: max-content;
+            display: none;
+           
+        }
+    .slideItem{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        @include mobile{
+            position: relative;
+            width: 100%;
+            height: 150px !important;
+        }
+
+        img{
+            width:400px;
+            height: 180px;
+            object-fit: cover;
+        @include mobile {
+            width: 100%;
+            height: 100%;
+        }
+        }
+        .slidercontents{
+            width: 30%;
+            text-align: left;
+            height: max-content;
+        @include mobile {
+            position: absolute;
+            top: 20px;
+            right: 0;
+        }
+            h4{
+                font-size: 25px;
+                margin: 10px 0px;
+
+            }
+            p{
+                font-size: 14px;
+                margin-bottom: 10px;
+        @include mobile {
+            display:none;
+        }
+
+            }
+            button{
+                background-color: transparent;
+                border: 1px solid lightgray;
+                cursor: pointer;
+                padding: 5px 20px;
+                border-radius: 20px;
+                &:hover{
+                    background-color: rgba(255,255,255,0.3);
+                    color: white;
+                }
+
+       @include mobile{
+        
+       }
+
+            }
+
+        }
+    }
+}

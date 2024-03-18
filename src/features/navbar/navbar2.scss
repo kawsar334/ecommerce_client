@@ -1,0 +1,27 @@
+
+
+@import  "../../global.scss";
+.navtwo{
+    position: sticky;
+    top: 70px;
+    left: 0;
+    z-index: 111;
+    background-color: white;
+    padding: 5px ;
+    border-bottom: 1px solid lightgray;
+    @include mobile{
+        display: none;
+    }
+    ul{
+        display: flex;
+        margin-left: 90px;
+        justify-content: flex-start;
+        li{
+            font-size: 20px;
+            cursor: pointer;
+
+            
+        }
+
+    }
+}
