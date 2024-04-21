@@ -14,14 +14,8 @@ export default function Navbar({ products, setProducts }) {
     const navigate = useNavigate()
     const location = useLocation().pathname;
 
-    const arr = [2,3,4];
-   let sum = arr.reduce((acc, curr)=>{
-    return acc  +curr ;
 
-   });
-   console.log(sum)
-    
-        
+
 
 
     // aos animation 
@@ -73,10 +67,21 @@ export default function Navbar({ products, setProducts }) {
                             <span>{product?.products.length}</span>
                         </div></NavLink></li>
                     </ul>
+
                     <span className='close' onClick={() => setOpen(!open)}><i class="fa-solid fa-xmark"></i></span>
                 </div>}
-                <div className="menuIcon" onClick={() => setOpen(!open)}>
-                    <i className="fa-solid fa-bars" style={{ fontSize: "30px" }}></i>
+                <div className='navmenucontainer'>
+                    <div className="menuIcon" onClick={() => setOpen(!open)}>
+                        <i className="fa-solid fa-bars" style={{ fontSize: "30px" }}></i>
+                    </div>
+                    <span className=''>
+                        <NavLink to="/cart">
+                        <div className="counter">
+                            <i className="fa-solid fa-bag-shopping"></i>
+                            <span>{product?.products.length}</span>
+                        </div>
+                    </NavLink>
+                    </span>
                 </div>
             </div>
         </div>

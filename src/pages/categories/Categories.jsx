@@ -26,7 +26,6 @@ const Categories = () => {
   return (
     <>
         <Navbar/>
-    
           {products.length < 1 ?
            <div className="empty">
             <h1 >Empty product lists</h1>

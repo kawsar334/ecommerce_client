@@ -6,10 +6,13 @@ import { NavLink, useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { addProduct } from "../../redux/cardSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import Annoucement from "../../features/annnoucement/Annoucement";
 
 const Details = () => {
+    // const cart = useSelector((item)=>item.cart);
+    const cart = useSelector((state) => state.cart);
+
     const id = useLocation().pathname.split("/")[2];
     const [product, setProduct] = useState({});
     const [quantity, setQuantity] = useState(1);
@@ -36,7 +39,13 @@ const Details = () => {
     }
     // handling add product functionality 
     const handleAdd = () => {
-        dispatch(addProduct({ ...product, }))
+        const existingProductIndex = cart?.products?.findIndex((item)=>item?._id === product?._id);
+        if(existingProductIndex === -1){
+            dispatch(addProduct({ id: product.id, quantity: 1 }));
+        }else{
+
+            dispatch(addProduct({ ...product, quantity: 1 }))
+        }
     }
     // getting related product from database . by category 
     useEffect(() => {
@@ -75,7 +84,7 @@ const Details = () => {
                             <div className="colors">
                                 <h3>colors:</h3>
                                 {product?.colors?.length > 0 && product?.colors?.map((c) => (
-                                    <span key={c} className="color" onClick={(e)=>setColors(c)} style={{ background: c }}></span>
+                                    <span key={c} className="color" onClick={(e) => setColors(c)} style={{ background: c }}></span>
                                 ))}
 
                             </div>

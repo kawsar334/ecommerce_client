@@ -9,29 +9,28 @@ import { removeProduct } from '../../redux/cardSlice';
 import Login from '../login/Login';
 import { userRequest } from '../../redux/apiCalls';
 
-
-
 const CartPage = () => {
   const cart = useSelector((state) => state?.cart);
+ 
   const navigate = useNavigate()
   const Auth = localStorage.getItem("auth");
   const dispatch = useDispatch();
   const [stripeToken, setStripeToken] = useState(null);
-  const [isLogin, setIsLogin] = useState(false);
   const [user, setUser] = useState({})
- useEffect(()=>{
-   userRequest.get(`/user/find/${Auth}`)
-     .then(response => {
-       setUser(response.data.user);
-     })
-     .catch(error => {
-       console.error(error);
-     });
- },[Auth])
+  
+  useEffect(() => {
+    userRequest.get(`/user/find/${Auth}`)
+      .then(response => {
+        setUser(response.data.user);
+      })
+      .catch(error => {
+        console.error(error);
+      });
+  }, [Auth])
 
   // 
   const onToken = (token) => {
-      setStripeToken(token);
+    setStripeToken(token);
   };
 
   // 
@@ -43,14 +42,19 @@ const CartPage = () => {
           amount: Math.round(cart?.total * 100),
         });
         console.log(res.data);
-        if(res.data){
+        if (res.data) {
           navigate("/success");
         }
       } catch (err) {
         console.log(err.response.data);
       }
     }
-    stripeToken && makeRequiest();
+    if(Auth){
+
+      stripeToken && makeRequiest();
+    }else{
+      navigate("/login")
+    }
   }, [stripeToken]);
 
 
@@ -69,14 +73,15 @@ const CartPage = () => {
             {cart?.products?.map((item) => (
 
               <div className="item" key={item.id}>
+                {console.log("item?.quantity", item)}
                 <div className="itemcontents">
                   <div className="itemleft">
-                    <img src={item?.images[0 || 1]} alt="Loading..." className="itemimg" />
+                    <img src={item?.images[0] || item?.images[1]} alt="Loading..." className="itemimg" />
                     <div className="itemcontent">
                       <h3 className='font-semibold ' style={{ color: `${item?.color}` }} >{item?.title} </h3>
-                      <span style={{ color: `${item?.color}` }}>{item.color}</span>
+                      <span style={{ color: `${item?.color  }` }}>{item.color}</span>
                       <select style={{ color: `${item?.color}` }}>
-                        <option value="1">{item.quantity}</option>
+                        <option value="1">{item?.quantity || item?.product?.quantity}</option>
                       </select>
                       <span>{item?.category}</span>
                       <span className=''>{item.stock && "In Stock"} </span>
@@ -84,7 +89,7 @@ const CartPage = () => {
                   </div>
                 </div>
                 <div className="itemright">
-                  <span>${item.price}</span>
+                  <span>${item?.price  * item?.quantity || cart?.quantity}</span>
                   <button className='removebtn' onClick={() => dispatch(removeProduct(item))}>Remove</button>
                 </div>
               </div>
@@ -93,7 +98,7 @@ const CartPage = () => {
           <div className="cartbottom flex flex-col relative">
             <span className='text-2xl text-black'>Subtotal</span>
             <span className='text-gray-400'>Shipping and taxes will be calculated at checkout.</span>
-            <span className="total absolute ">{cart.total}</span>
+            <span className="total absolute ">{Number(cart?.total)} </span>
           </div>
           <StripeCheckout className="checkoutbtn "
             name={user?.name || ""}
@@ -101,7 +106,7 @@ const CartPage = () => {
             image={'https://tailwindui.com/img/ecommerce-images/shopping-cart-page-04-product-01.jpg'}
             ComponentClass="div"
             panelLabel="pay Money"
-            amount={cart?.total * 100}
+            amount={ 100}
             currency="SAR"
             stripeKey="pk_test_51KGo0XHG7qACO4ZleQqv0XtS5T9ryIsssF6WRliEaQZOJ0sVZm5TSes4uQVS9bSuAKyjeysqnUD8DFgNDGxJF8oC002HOxI3YC"
             email={user?.email || ""}
